@@ -37,6 +37,18 @@ generate_loop_exit:
 	addi sp, sp, 12
 	jr ra
 
+# Generates 2 pixel-wide line
+generate_thick_line:
+	addi sp, sp, -4
+	sw ra, 0(sp)
+
+	jal generate_line
+	jal generate_line
+	
+	lw ra, 0(sp)
+	addi sp, sp, 4
+	jr ra
+
 
 # ========================================================================
 generate:
@@ -46,7 +58,7 @@ generate:
 	lw a1, ImgInfo_width(a0)
 	lw a2, ImgInfo_height(a0)
 	
-	jal generate_line
+	jal generate_thick_line
 
 generate_exit:
 	lw ra, 0(sp)		#pop ra
