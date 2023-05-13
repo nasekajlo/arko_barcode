@@ -15,12 +15,26 @@ imgData: 	.space	MAX_IMG_SIZE
 ifname:		.asciz  "white.bmp"
 ofname: 	.asciz  "result.bmp"
 
-input:		.asciz  "PINEAPPLE"
+input:		.space 	19 # Supports up to 19 characters
+prompt:		.asciz 	"\n(Must start and end with '*' to be valid)\nText: "
 
 
 	.text
 	
 main:
+# Setup prompt and input
+	
+	li a7, 4
+	la a0, prompt
+	ecall
+	
+	li a7, 8
+	la a0, input
+	li a1, 19
+	ecall
+	
+	mv a5, a0
+
 # initialize image descriptor
 	la a0, imgInfo 
 	la t0, ifname	# input file name
