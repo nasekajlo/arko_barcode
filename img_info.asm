@@ -23,7 +23,7 @@
 .eqv ImgInfo_bpp		20	# bits per pixel (either 1 or 4)
 .eqv ImgInfo_lbytes		24
 
-.eqv MAX_IMG_SIZE 		2048
+.eqv MAX_IMG_SIZE 		4096
 
 # more information about bmp format: https://en.wikipedia.org/wiki/BMP_file_format
 .eqv BMPHeader_Size 54
