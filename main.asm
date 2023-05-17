@@ -12,7 +12,7 @@ bmpHeader:	.space	BMPHeader_Size
 	.align 2
 imgData: 	.space	MAX_IMG_SIZE
 
-ifname:		.asciz  "white.bmp"
+ifname:		.asciz  "source.bmp"
 ofname: 	.asciz  "result.bmp"
 
 input:		.space 	19 # Supports up to 19 characters
@@ -22,18 +22,7 @@ prompt:		.asciz 	"\n(Must start and end with '*' to be valid)\nText: "
 	.text
 	
 main:
-# Setup prompt and input
-	
-	li a7, 4
-	la a0, prompt
-	ecall
-	
-	li a7, 8
-	la a0, input
-	li a1, 19
-	ecall
-	
-	mv a5, a0
+
 
 # initialize image descriptor
 	la a0, imgInfo 
@@ -47,7 +36,7 @@ main:
 	bnez a0, main_failure
 
 	la a0, imgInfo
-	jal generate
+	jal write_line
 	
 	la a0, imgInfo
 	la t0, ofname
